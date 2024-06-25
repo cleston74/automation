@@ -1,0 +1,7 @@
+---
+- name: Shutdown Environment KUBE LAB
+  hosts: all
+  tasks:
+  - name: Shutdown Environment KUBE LAB
+    shell: init 0
+

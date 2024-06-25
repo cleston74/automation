@@ -1,0 +1,62 @@
+#################################################################
+##### Install, Configuring ContainerD application           #####
+##### Install Kernel Modules                                #####
+##### Configutration SYSCTL Parameters                      #####
+#################################################################
+- name: INSTALL AND CONFIGURE CONTAINERD APPLICATION
+  hosts: control_plane_master,worker_node
+  gather_facts: no
+  vars_files: "/storage/automation/ansible-files/kban-variables.yaml"
+  tasks:
+  - name: Install Kernel Modules
+    ansible.builtin.copy:
+      src: /storage/automation/configs/k8s.conf
+      dest: /etc/modules-load.d/k8s.conf
+      mode: '644'
+  - name: Add Overlay Module
+    modprobe:
+      name: overlay
+      state: present
+  - name: Add br_netfilter Module
+    modprobe:
+      name: br_netfilter
+      state: present
+  - name: Configutration SYSCTL Parameters
+    ansible.builtin.copy:
+      src: /storage/automation/configs/k8s-cri.conf
+      dest: /etc/sysctl.d/k8s-cri.conf
+      mode: '644'
+  - name: Execution Command SYSCTL reload
+    command: "sysctl --system"
+  - name: Setting Timezone
+    command: timedatectl set-timezone America/Fortaleza
+  - name: COPY Script - Add Repo Docker Key APT
+    ansible.builtin.copy:
+      src: /storage/automation/scripts/add-docker-gpg.sh
+      dest: /tmp/add-docker-gpg.sh
+      mode: '777'
+  - name: EXECUTE Script - Add Repo Docker Key APT
+    command: /tmp/add-docker-gpg.sh
+  - name: Add Repo ContainerD
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu focal stable
+      state: present
+  - name: Install ContainerD
+    apt:
+      name: containerd.io #={{ pct_contd }}
+      state: latest #present
+  - name: ContainerD Configuration
+    file:
+      path: /etc/containerd
+      state: directory
+      owner: root
+      group: root
+      mode: '644'
+  - name: ContainerD file configuration
+    shell: containerd config default > /etc/containerd/config.toml
+  - name: Change config ContainerD
+    command: sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+  - name: Restart ContainerD
+    ansible.builtin.service:
+      name: containerd
+      state: restarted

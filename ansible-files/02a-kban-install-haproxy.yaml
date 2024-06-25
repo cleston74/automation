@@ -1,0 +1,20 @@
+#################################################################
+##### Install Chrony                                        #####
+#################################################################
+- name: INSTALL AND CONFIGURE HAPROXY
+  hosts: haproxy
+  gather_facts: no
+  tasks:
+  - name: Install HAPROXY Application
+    apt:
+      pkg:
+      - haproxy
+  - name: Copy haproxy configuration
+    ansible.builtin.copy:
+      src: /storage/automation/configs/haproxy.cfg
+      dest: /etc/haproxy/haproxy.cfg
+      mode: '755'
+  - name: Restart haproxy
+    service:
+      name: haproxy
+      state: restarted

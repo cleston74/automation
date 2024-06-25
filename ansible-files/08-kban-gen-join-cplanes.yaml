@@ -1,0 +1,13 @@
+################################################################
+#### Initializing the New ControlPlane                     #####
+################################################################
+- name: GENERATE JOIN COMMAND CONTROLPLANE
+  hosts: control_plane_master
+  tasks:
+  - name: COPY Script - Generate Join Command ( --->>> )
+    ansible.builtin.copy:
+      src: /storage/automation/scripts/generate-cp-join.sh
+      dest: /tmp/generate-cp-join.sh
+      mode: '777'
+  - name: EXECUTE Script - Generate Join Command
+    command: /tmp/generate-cp-join.sh

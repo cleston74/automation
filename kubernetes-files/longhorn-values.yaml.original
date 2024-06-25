@@ -1,0 +1,11 @@
+service:
+  ui:
+    type: LoadBalancer
+    #type: NodePort
+    # nodePort: 30000
+  manager:
+    type: LoadBalancer
+    #type: ClusterIP
+    nodePort: ""
+    loadBalancerIP: ""
+    loadBalancerSourceRanges: ""

@@ -1,0 +1,8 @@
+service:
+  ui:
+    type: LoadBalancer
+  manager:
+    type: LoadBalancer
+    nodePort: ""
+    loadBalancerIP: ""
+    loadBalancerSourceRanges: ""

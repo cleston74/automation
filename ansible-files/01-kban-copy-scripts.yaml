@@ -1,0 +1,11 @@
+#################################################################
+##### Copy Essencials Scripts Files                         #####
+#################################################################
+- name: COPY ESSENCIALS SCRIPTS
+  hosts: all
+  tasks:
+  - name: COPY Script - Update REPOs
+    ansible.builtin.copy:
+      src: /storage/automation/scripts/update-packets.sh
+      dest: /tmp/update-packets.sh
+      mode: '777'

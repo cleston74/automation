@@ -1,0 +1,13 @@
+#################################################################
+##### Config /etc/hosts                                     #####
+#################################################################
+- name: CONFIGURE /ETC/HOSTS
+  hosts: all
+  gather_facts: no
+  tasks:
+  - name: Copy hosts file configuration
+    ansible.builtin.copy:
+      src: /storage/automation/configs/hosts
+      dest: /etc/hosts
+      mode: '644'
+

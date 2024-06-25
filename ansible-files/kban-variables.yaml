@@ -1,0 +1,22 @@
+#
+# Environment variables
+#
+### Network that will be used in PODs and SERVICEs
+pod_cidr: 10.100.50.0/22
+svc_cidr: 10.200.100.0/22
+
+### Configuring the Control Plane Master IP and HAPROXY IP
+ip_master: 192.168.99.200
+ip_loadbalance: 192.168.99.210
+
+###
+# Configuration of the domain that will be used in the Cluster
+# For local lab, configure the /etc/hosts file
+cp_endpoint: acme.org
+
+###
+# Version of packages to be installed in the Cluster
+pct_kctl: 1.28.10-1.1
+pct_kadm: 1.28.10-1.1
+pct_klet: 1.28.10-1.1
+pct_contd: 1.6.12-1

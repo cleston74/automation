@@ -1,0 +1,21 @@
+#################################################################
+##### Install Chrony                                        #####
+#################################################################
+- name: INSTALL AND CONFIGURE CHRONY
+  hosts: all
+  gather_facts: no
+  tasks:
+  - name: Install Chrony Application
+    apt:
+      pkg:
+      - chrony
+  - name: Copy chrony configuration
+    ansible.builtin.copy:
+      src: /storage/automation/configs/chrony.conf
+      dest: /etc/chrony/chrony.conf
+      mode: '755'
+  - name: Restart chronyd
+    service:
+      name: chronyd
+      state: restarted
+

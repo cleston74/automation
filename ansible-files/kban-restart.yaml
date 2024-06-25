@@ -1,0 +1,7 @@
+---
+- name: Restart Environment KUBE LAB
+  hosts: all
+  tasks:
+  - name: Restart Environment KUBE LAB
+    shell: init 6
+

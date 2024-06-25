@@ -1,0 +1,14 @@
+#####
+# Kubernates LAB Addresses
+# laboratorio acme.org
+#####
+
+192.168.99.254   fw01		fw01.acme.org
+192.168.99.195   brspappdb01	brspappdb01.acme.org
+192.168.99.199   ansible
+192.168.99.200   brspappcp01	brspappcp01.acme.org
+192.168.99.205   brspappwk01	brspappwk01.acme.org
+192.168.99.206   brspappwk02	brspappwk02.acme.org
+
+192.168.99.200   acme.org
+

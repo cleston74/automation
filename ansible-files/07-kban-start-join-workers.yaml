@@ -1,0 +1,16 @@
+################################################################
+#### Initializing the Workers                              #####
+################################################################
+- name: STARTING JOIN KUBERNETES WORKERS
+  hosts: worker_node
+  vars_files: "/storage/automation/ansible-files/kban-variables.yaml"
+  tasks:
+  - name: Loading variables
+    ansible.builtin.include_vars:
+      dir: "/"
+      files_matching: kban-variables.yaml
+  - name: Clean Previous Installations in Workers
+    command: kubeadm reset -f
+  - name: Executing Join Command in Workers
+    command: "{{ hostvars[groups['control_plane'][0]]['join_command'] }}"
+
