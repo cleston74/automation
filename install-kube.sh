@@ -185,6 +185,9 @@ else
       echo -e "$rancherIP\t rancher.acme.org" >> /etc/hosts
     }
 
+### install metrics
+# kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
     ###
     # Join New ControlPlane if high availability
     # functionBanner "Generating ingress file for new Control Planes ..."
