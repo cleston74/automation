@@ -119,6 +119,7 @@ else
 
     functionBanner "Installing the MetalLB on Kubernetes Cluster ..."
     /usr/local/bin/helm repo add metallb https://metallb.github.io/metallb
+    # /usr/local/bin/helm install metallb metallb/metallb -n metallb-system --create-namespace
     /usr/local/bin/helm install metallb metallb/metallb
 
     functionBanner "Installing the Ingress Controller on Kubernetes Cluster ..."
